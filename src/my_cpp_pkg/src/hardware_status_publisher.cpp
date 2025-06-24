@@ -1,12 +1,14 @@
 #include "rclcpp/rclcpp.hpp"
 #include "my_robot_interfaces/msg/hardware_status.hpp"
 
+const char *TIMER_SECOND_PARAM = "timer_seconds";
 
 class HardwareStatusPublisherNode : public rclcpp::Node {
     public:
         HardwareStatusPublisherNode() : rclcpp::Node("hardware_status_publisher") {
+            this->declare_parameter(TIMER_SECOND_PARAM, 1);
             this->publisher = this->create_publisher<my_robot_interfaces::msg::HardwareStatus>("hardware_status", 10);
-            this->_timer = this->create_wall_timer(std::chrono::seconds(1),
+            this->_timer = this->create_wall_timer(std::chrono::seconds(this->get_parameter(TIMER_SECOND_PARAM).as_int()),
                                                    std::bind(&HardwareStatusPublisherNode::publishHardwareStatus, this));
 
             RCLCPP_INFO(this->get_logger(), "Hardware Status Publisher has started");
