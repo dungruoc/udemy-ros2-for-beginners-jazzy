@@ -9,6 +9,7 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(example_interfaces REQUIRED)
+find_package(my_robot_interfaces REQUIRED)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -43,6 +44,12 @@ ament_target_dependencies(add_two_ints_client_simple rclcpp example_interfaces)
 add_executable(add_two_ints_client src/add_two_ints_client.cpp)
 ament_target_dependencies(add_two_ints_client rclcpp example_interfaces)
 
+add_executable(hardware_status_publisher src/hardware_status_publisher.cpp)
+ament_target_dependencies(hardware_status_publisher rclcpp my_robot_interfaces)
+
+
+add_executable(led_panel src/led_panel.cpp)
+ament_target_dependencies(led_panel rclcpp my_robot_interfaces)
 
 install(
   TARGETS
@@ -53,6 +60,8 @@ install(
   add_two_ints_server
   add_two_ints_client_simple
   add_two_ints_client
+  hardware_status_publisher
+  led_panel
   DESTINATION lib/${PROJECT_NAME}
 )
 
