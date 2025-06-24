@@ -26,6 +26,8 @@ Use [Jazzy installation guides](https://docs.ros.org/en/jazzy/Installation.html)
 
 # ROS2 Services - Client/Server Communication
 
+![ROS2 Services](images/ros-services.png)
+
 ## Introspect services with ros2 command line
 
 launch a node with service
@@ -104,3 +106,8 @@ example_interfaces.srv.AddTwoInts_Response(sum=7)
 $ ros2 run my_py_pkg add_two_ints_client --ros-args -r add_two_ints:=abc
 [INFO] [1750653636.058925815] [add_two_ints_client]: Received: 11
 ```
+
+# ROS2 Interfaces - Msg/Srv interfaces
+
+[ROS2 Create Custom Message (Msg/Srv)](https://roboticsbackend.com/ros2-create-custom-message/)
+
