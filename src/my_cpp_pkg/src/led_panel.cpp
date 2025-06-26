@@ -6,7 +6,9 @@
 
 class LedPanelNode : public rclcpp::Node {
     public:
-        LedPanelNode() : rclcpp::Node("led_panel"), led_panel{0, 0, 0} {
+        LedPanelNode() : rclcpp::Node("led_panel") {
+            this->declare_parameter<std::vector<bool> >("led_panel", {0, 0, 0});
+            this->get_parameter("led_panel", this->led_panel);
             publisher = this->create_publisher<my_robot_interfaces::msg::LedPanelState>("led_panel", 10);
             server = this->
                 create_service<my_robot_interfaces::srv::SetLed>(
@@ -25,7 +27,7 @@ class LedPanelNode : public rclcpp::Node {
         void publishPanel() {
             auto message = my_robot_interfaces::msg::LedPanelState();
             message.led_states = led_panel;
-            RCLCPP_INFO(this->get_logger(), "Sending [%d, %d, %d]", (int)led_panel.at(0), (int)led_panel.at(1), (int)led_panel.at(2));
+            RCLCPP_INFO(this->get_logger(), "Sending panel size: %ld", led_panel.size());
             this->publisher->publish(message);
         }
 

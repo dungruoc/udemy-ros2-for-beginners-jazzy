@@ -111,3 +111,34 @@ $ ros2 run my_py_pkg add_two_ints_client --ros-args -r add_two_ints:=abc
 
 [ROS2 Create Custom Message (Msg/Srv)](https://roboticsbackend.com/ros2-create-custom-message/)
 
+# Change Node Settings at runtime with ROS2 parameters
+
+1. Declare and use it in codes
+```python
+node.declare_parameter("number", 5)
+number = node.get_parameter("number").value
+```
+2. Set it at runtime
+```bash
+$ ros2 run package_name node_name --ros-args -p number:=3
+$ ros2 param list
+/nubmer_publisher:
+  number
+```
+
+## YAML parameter files
+
+1. Input params in ```params_file.yaml```
+```yaml
+/number_publisher1:
+  ros__parameters:
+    number: 3
+```
+2. Run the node with input params file
+```bash
+$ ros2 run my_py_pkg number_publisher --ros-args -r __node:=number_publisher1 --params-file ./ros_param_yaml/number_params.yaml
+[INFO] [1750814847.991033229] [number_publisher1]: Number Publisher started
+[INFO] [1750814849.055598733] [number_publisher1]: sending 3
+[INFO] [1750814849.993648201] [number_publisher1]: sending 3
+```
+
