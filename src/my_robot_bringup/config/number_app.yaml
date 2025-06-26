@@ -1,0 +1,4 @@
+/my_test/my_number_publisher:
+  ros__parameters:
+    number: 3
+    timer_period: 2.0
