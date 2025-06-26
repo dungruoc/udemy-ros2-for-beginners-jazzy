@@ -1,0 +1,11 @@
+/robot_news_station_c30:
+  ros__parameters:
+    robot_name: "C30"
+
+/robot_news_station_abc:
+  ros__parameters:
+    robot_name: "ABC"
+
+/robot_news_station_xyz:
+  ros__parameters:
+    robot_name: "XYZ"
